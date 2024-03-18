@@ -26,7 +26,7 @@ public class WelcomeController {
 		return "Hey, I'm up now.";
 	}
 	
-	@GetMapping("/welcome1")
+	@GetMapping("/welcome")
 	public Map<String, String> getWelcomeMesage1() {
 		Map<String, String> map = new HashMap<>();
 		map.put("status", "Success");

@@ -3,10 +3,12 @@ package com.tejovat.starmart.service.impl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.tejovat.starmart.dto.CustomerDto;
 import com.tejovat.starmart.model.Customer;
 import com.tejovat.starmart.repository.CustomerRepository;
 import com.tejovat.starmart.service.CustomerService;
@@ -18,8 +20,10 @@ public class CustomerServiceImpl implements CustomerService {
 	private CustomerRepository customerRepository;
 
 	@Override
-	public List<Customer> getAllCustomers() {
-		return customerRepository.findAll();
+	public List<CustomerDto> getAllCustomers() {
+		List<CustomerDto> customerDtoList = customerRepository.findAll().stream().
+				map(customer -> convertCustomerEntityToDto(customer)).collect(Collectors.toList());
+		return customerDtoList;
 	}
 
 	@Override
@@ -59,5 +63,26 @@ public class CustomerServiceImpl implements CustomerService {
 			map.put("deleted", Boolean.FALSE);
 		}
 		return map;
+	}
+	
+	
+	public CustomerDto convertCustomerEntityToDto(Customer customer) {
+		CustomerDto customerDto = new CustomerDto();
+		customerDto.setId(customer.getId());
+		customerDto.setFirstName(customer.getFirstName());
+		customerDto.setLastName(customer.getLastName());
+		customerDto.setUsername(customer.getUsername());
+		customerDto.setActive(customer.getActive());
+		return customerDto;
+	}
+
+	@Override
+	public Customer getCustomerByUsername(String username) {
+		List<Customer> list = customerRepository.findByUsername(username);
+		if(list != null  && list.size() > 0) {
+			return list.get(0);
+		}else {
+			return null;
+		}
 	}
 }
