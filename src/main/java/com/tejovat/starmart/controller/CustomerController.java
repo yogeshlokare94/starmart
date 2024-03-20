@@ -34,8 +34,9 @@ public class CustomerController {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<?> getCustomerById(@PathVariable("id") Long id) {
-		return new ResponseEntity<>(customerService.getCustomerById(id), HttpStatus.OK);
+	public ResponseEntity<?> getCustomerById(@PathVariable("id") Long id){
+		Customer customer  = customerService.getCustomerById(id);
+		return new ResponseEntity<>(customer, HttpStatus.OK);
 	}
 	
 	@PostMapping("")
@@ -59,7 +60,7 @@ public class CustomerController {
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<?> updateCustomer(@PathVariable("id") Long id, @RequestBody Customer customer) {
+	public ResponseEntity<?> updateCustomer(@PathVariable("id") Long id, @RequestBody Customer customer){
 		Customer updatedCustomer = customerService.updateCustomer(id, customer);
 		return new ResponseEntity<>(updatedCustomer, HttpStatus.OK);
 	}

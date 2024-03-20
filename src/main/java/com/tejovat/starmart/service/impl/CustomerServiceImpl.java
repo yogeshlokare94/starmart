@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.tejovat.starmart.dto.CustomerDto;
+import com.tejovat.starmart.exception.NoCustomerFoundException;
 import com.tejovat.starmart.model.Customer;
 import com.tejovat.starmart.repository.CustomerRepository;
 import com.tejovat.starmart.service.CustomerService;
@@ -28,7 +29,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public Customer getCustomerById(Long id){
-		return customerRepository.findById(id).orElse(null);
+		return customerRepository.findById(id).orElseThrow(() -> new NoCustomerFoundException("Customer not found with this Id: "+id));
 	}
 	
 	//Create/Save Customer
@@ -39,7 +40,7 @@ public class CustomerServiceImpl implements CustomerService {
 	
 	//Edit/Update Customer
 	@Override
-	public Customer updateCustomer(Long id, Customer customer) {
+	public Customer updateCustomer(Long id, Customer customer){
 		Customer existingCustomer  = getCustomerById(id);
 		if(existingCustomer != null) {
 			existingCustomer.setFirstName(customer.getFirstName());
@@ -53,7 +54,7 @@ public class CustomerServiceImpl implements CustomerService {
 	
 	//Delete customer By Id
 	@Override
-	public Map<String, Boolean> deleteCustomerById(Long id) {
+	public Map<String, Boolean> deleteCustomerById(Long id){
 		Map<String, Boolean> map = new HashMap<>();
 		Customer existingCustomer  = getCustomerById(id);
 		if(existingCustomer != null) {

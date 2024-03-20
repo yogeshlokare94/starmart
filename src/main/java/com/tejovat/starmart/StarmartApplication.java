@@ -9,5 +9,4 @@ public class StarmartApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(StarmartApplication.class, args);
 	}
-
 }
