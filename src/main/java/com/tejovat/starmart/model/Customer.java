@@ -2,6 +2,7 @@ package com.tejovat.starmart.model;
 
 import java.io.Serializable;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
@@ -10,6 +11,11 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.AssertTrue;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,17 +36,28 @@ public class Customer implements Serializable{
 	@Column(name="id")
 	private Long id;
 	
-	@Column(name="firstname", nullable = true)
-	private String firstName;
+	@NotNull(message="FirstName can't be null")
+	@Size(min=3, message="Name at least 3 characters")
+	@Column(name="firstname")
+	private String firstName; //getFirstName() setFirstName(String firstName)
 	
-	@Column(name="lastname", nullable = true)
+	@NotNull(message="LastName can't be null")
+	@Column(name="lastname")
 	private String lastName;
 	
+	@NotBlank(message = "Email can't be empty")
+	@Email(message="Please enter Email correctly")
+	private String email;
+	
+	@Size(min=10, max= 12, message = "Please enter contact no. more than 10 digit & less than 12 digit")
+	@Column(name="contactno")
+	private String contactNo;
+	
+	@AssertTrue
 	private Boolean active;
 	
 	private String username;
 	
 	@JsonIgnore
-	private String password;	
-	
+	private String password;
 }

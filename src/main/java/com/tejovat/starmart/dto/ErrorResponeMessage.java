@@ -1,7 +1,7 @@
 package com.tejovat.starmart.dto;
 
 import java.util.Date;
-import java.util.List;
+import java.util.Map;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,5 +17,5 @@ public class ErrorResponeMessage {
 	private Integer statusCode;
 	private Date timestamp;
 	private String message;
-	private List<String> errorList;
+	private Map<String, String> errorList;
 }

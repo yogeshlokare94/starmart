@@ -19,6 +19,8 @@ import com.tejovat.starmart.dto.LoginForm;
 import com.tejovat.starmart.model.Customer;
 import com.tejovat.starmart.service.CustomerService;
 
+import jakarta.validation.Valid;
+
 
 @RestController
 @RequestMapping("/customers")
@@ -40,7 +42,7 @@ public class CustomerController {
 	}
 	
 	@PostMapping("")
-	public ResponseEntity<?> createCustomer(@RequestBody Customer customer) {
+	public ResponseEntity<?> createCustomer(@RequestBody @Valid Customer customer) {
 		Customer newCustomer = customerService.createCustomer(customer);
 		return new ResponseEntity<>(newCustomer, HttpStatus.CREATED);
 	}
