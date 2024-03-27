@@ -20,4 +20,6 @@ public interface CustomerService {
 
 	public Customer getCustomerByUsername(String username);
 
+	public List<Customer> getCustomerByCityName(String cityName);
+
 }

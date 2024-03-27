@@ -2,14 +2,16 @@ package com.tejovat.starmart.model;
 
 import java.io.Serializable;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.Email;
@@ -60,4 +62,8 @@ public class Customer implements Serializable{
 	
 	@JsonIgnore
 	private String password;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="address_id", referencedColumnName = "id")
+	private Address address;
 }

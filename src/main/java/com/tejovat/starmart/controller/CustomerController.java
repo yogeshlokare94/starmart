@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tejovat.starmart.dto.CustomerDto;
@@ -70,5 +71,11 @@ public class CustomerController {
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> deleteCustomer(@PathVariable("id") Long id){
 		return new ResponseEntity<>(customerService.deleteCustomerById(id), HttpStatus.OK);
+	}
+	
+	@GetMapping("/city")
+	public ResponseEntity<?> getCustomersByCity(@RequestParam(name="cityName") String cityName){
+		List<Customer> customer  = customerService.getCustomerByCityName(cityName);
+		return new ResponseEntity<>(customer, HttpStatus.OK);
 	}
 }

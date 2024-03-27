@@ -1,5 +1,7 @@
 package com.tejovat.starmart.dto;
 
+import com.tejovat.starmart.model.Address;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,5 +18,6 @@ public class CustomerDto {
 	private String contactNo;
 	private Boolean active;
 	private String username;
+	private Address address;
 
 }
