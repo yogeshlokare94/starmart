@@ -1,12 +1,18 @@
 package com.tejovat.starmart.model;
 
 import java.io.Serializable;
+import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Table
@@ -30,5 +36,60 @@ public class Author implements Serializable{
 	
 	@Column(name="live")
 	private Boolean isLive;
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "author", fetch = FetchType.EAGER)
+	private List<Books> books;
 
+	public Author() {
+		super();
+	}
+
+	public Author(Long id, String authorName, String typeOfAuthor, Boolean isLive, List<Books> books) {
+		super();
+		this.id = id;
+		this.authorName = authorName;
+		this.typeOfAuthor = typeOfAuthor;
+		this.isLive = isLive;
+		this.books = books;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getAuthorName() {
+		return authorName;
+	}
+
+	public void setAuthorName(String authorName) {
+		this.authorName = authorName;
+	}
+
+	public String getTypeOfAuthor() {
+		return typeOfAuthor;
+	}
+
+	public void setTypeOfAuthor(String typeOfAuthor) {
+		this.typeOfAuthor = typeOfAuthor;
+	}
+
+	public Boolean getIsLive() {
+		return isLive;
+	}
+
+	public void setIsLive(Boolean isLive) {
+		this.isLive = isLive;
+	}
+
+	public List<Books> getBooks() {
+		return books;
+	}
+
+	public void setBooks(List<Books> books) {
+		this.books = books;
+	}
 }
