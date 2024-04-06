@@ -1,6 +1,7 @@
 package com.tejovat.starmart.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,6 +20,7 @@ import com.tejovat.starmart.dto.CustomerDto;
 import com.tejovat.starmart.dto.LoginForm;
 import com.tejovat.starmart.model.Customer;
 import com.tejovat.starmart.service.CustomerService;
+import com.tejovat.starmart.service.EmailsService;
 
 import jakarta.validation.Valid;
 
@@ -30,26 +32,29 @@ public class CustomerController {
 	@Autowired
 	private CustomerService customerService;
 	
+	@Autowired
+	EmailsService emailsService;
+	
 	@GetMapping("")
-	public ResponseEntity<?> getAllCustomers(){
+	public ResponseEntity<List<CustomerDto>> getAllCustomers(){
 		List<CustomerDto> list = customerService.getAllCustomers();
 		return new ResponseEntity<>(list, HttpStatus.OK);
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<?> getCustomerById(@PathVariable("id") Long id){
+	public ResponseEntity<Customer> getCustomerById(@PathVariable("id") Long id){
 		Customer customer  = customerService.getCustomerById(id);
 		return new ResponseEntity<>(customer, HttpStatus.OK);
 	}
 	
 	@PostMapping("")
-	public ResponseEntity<?> createCustomer(@RequestBody @Valid Customer customer) {
+	public ResponseEntity<Customer> createCustomer(@RequestBody @Valid Customer customer) {
 		Customer newCustomer = customerService.createCustomer(customer);
 		return new ResponseEntity<>(newCustomer, HttpStatus.CREATED);
 	}
 	
 	@PostMapping("/login")
-	public ResponseEntity<?> createCustomer(@RequestBody LoginForm loginForm) {
+	public ResponseEntity<String> createCustomer(@RequestBody LoginForm loginForm) {
 		Customer customer = customerService.getCustomerByUsername(loginForm.getUsername());
 		if(customer !=null) {
 			if(customer.getPassword().equals(loginForm.getPassword())){
@@ -63,13 +68,13 @@ public class CustomerController {
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<?> updateCustomer(@PathVariable("id") Long id, @RequestBody Customer customer){
+	public ResponseEntity<Customer> updateCustomer(@PathVariable("id") Long id, @RequestBody Customer customer){
 		Customer updatedCustomer = customerService.updateCustomer(id, customer);
 		return new ResponseEntity<>(updatedCustomer, HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<?> deleteCustomer(@PathVariable("id") Long id){
+	public ResponseEntity<Map<String, Boolean>> deleteCustomer(@PathVariable("id") Long id){
 		return new ResponseEntity<>(customerService.deleteCustomerById(id), HttpStatus.OK);
 	}
 	

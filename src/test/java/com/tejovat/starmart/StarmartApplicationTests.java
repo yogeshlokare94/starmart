@@ -10,4 +10,9 @@ class StarmartApplicationTests {
 	void contextLoads() {
 	}
 
+	@Test
+	public void applicationStarts() {
+		StarmartApplication.main(new String[] {});
+	}
+
 }
