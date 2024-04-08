@@ -17,8 +17,11 @@ import com.tejovat.starmart.service.CustomerService;
 @Service
 public class CustomerServiceImpl implements CustomerService {
 	
-	@Autowired
 	private CustomerRepository customerRepository;
+	
+	CustomerServiceImpl(CustomerRepository customerRepository){
+		this.customerRepository = customerRepository;
+	}
 
 	@Override
 	public List<CustomerDto> getAllCustomers() {
