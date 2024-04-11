@@ -1,22 +1,18 @@
 package com.tejovat.starmart.model;
-
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
-
+import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
 
+@Table(name = "users")
+@Entity
 public class User implements UserDetails{
-	
-	/**
+    /**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
@@ -42,9 +38,44 @@ public class User implements UserDetails{
     @UpdateTimestamp
     @Column(name = "updated_at")
     private Date updatedAt;
-    
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		return List.of();
+	}
+
+	@Override
+	public String getPassword() {
+		return password;
+	}
+
+	@Override
+	public String getUsername() {
+		return email;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return true;
+	}
 
 	public User() {
+		
 	}
 
 	public User(Integer id, String fullName, String email, String password, Date createdAt, Date updatedAt) {
@@ -96,47 +127,7 @@ public class User implements UserDetails{
 		this.updatedAt = updatedAt;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return List.of();
-	}
-
-	@Override
-	public String getPassword() {
-		return password;
-	}
-
-	@Override
-	public String getUsername() {
-		return email;
-	}
-
-	@Override
-	public boolean isAccountNonExpired() {
-		return true;
-	}
-
-	@Override
-	public boolean isAccountNonLocked() {
-		return true;
-	}
-
-	@Override
-	public boolean isCredentialsNonExpired() {
-		return true;
-	}
-
-	@Override
-	public boolean isEnabled() {
-		return true;
-	}
-
 }
