@@ -29,7 +29,7 @@ import lombok.Setter;
 @Setter
 @Table
 @Entity(name="customer")
-public class Customer implements Serializable{
+public class Customer extends AuditorEntity implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 

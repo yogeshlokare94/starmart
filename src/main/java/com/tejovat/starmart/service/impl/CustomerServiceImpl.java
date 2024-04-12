@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.tejovat.starmart.dto.CustomerDto;
@@ -48,7 +47,9 @@ public class CustomerServiceImpl implements CustomerService {
 		if(existingCustomer != null) {
 			existingCustomer.setFirstName(customer.getFirstName());
 			existingCustomer.setLastName(customer.getLastName());
+			existingCustomer.setEmail(customer.getEmail());
 			existingCustomer.setUsername(customer.getUsername());
+			existingCustomer.setContactNo(customer.getContactNo());
 			existingCustomer.setActive(customer.getActive());
 			return customerRepository.save(existingCustomer);
 		}
@@ -96,5 +97,10 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public List<Customer> getCustomerByCityName(String cityName) {
 		return customerRepository.getCustomerListByCityName(cityName);
+	}
+
+	@Override
+	public List<Customer> getEntityList() {
+		return customerRepository.findAll();
 	}
 }

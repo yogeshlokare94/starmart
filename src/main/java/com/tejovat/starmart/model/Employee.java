@@ -18,7 +18,7 @@ import jakarta.validation.constraints.NotEmpty;
 
 @Table
 @Entity(name="employee")
-public class Employee {
+public class Employee extends AuditorEntity{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

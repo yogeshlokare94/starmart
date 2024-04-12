@@ -2,6 +2,8 @@ package com.tejovat.starmart.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.domain.AuditorAware;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -14,6 +16,7 @@ import com.tejovat.starmart.repository.UserRepository;
 
 
 @Configuration
+@EnableJpaAuditing(auditorAwareRef = "auditorProvider")
 public class ApplicationConfiguration {
 	
     private final UserRepository userRepository;
@@ -46,5 +49,10 @@ public class ApplicationConfiguration {
         authProvider.setPasswordEncoder(passwordEncoder());
 
         return authProvider;
+    }
+    
+    @Bean
+    AuditorAware<Long> auditorProvider(){
+		return new AuditorAwareImpl();
     }
 }

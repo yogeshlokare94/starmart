@@ -22,4 +22,6 @@ public interface CustomerService {
 
 	public List<Customer> getCustomerByCityName(String cityName);
 
+	public List<Customer> getEntityList();
+
 }

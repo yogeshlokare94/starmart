@@ -18,9 +18,9 @@ public class User implements UserDetails{
 	private static final long serialVersionUID = 1L;
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
-    private Integer id;
+    private Long id;
 
     @Column(nullable = false)
     private String fullName;
@@ -78,7 +78,7 @@ public class User implements UserDetails{
 		
 	}
 
-	public User(Integer id, String fullName, String email, String password, Date createdAt, Date updatedAt) {
+	public User(Long id, String fullName, String email, String password, Date createdAt, Date updatedAt) {
 		this.id = id;
 		this.fullName = fullName;
 		this.email = email;
@@ -87,11 +87,11 @@ public class User implements UserDetails{
 		this.updatedAt = updatedAt;
 	}
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
