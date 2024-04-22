@@ -18,6 +18,6 @@ public class CustomerDto {
 	private String contactNo;
 	private Boolean active;
 	private String username;
-	private Address address;
+//	private Address address;
 
 }

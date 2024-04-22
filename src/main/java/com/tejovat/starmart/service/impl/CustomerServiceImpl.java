@@ -80,7 +80,7 @@ public class CustomerServiceImpl implements CustomerService {
 		customerDto.setContactNo(customer.getContactNo());
 		customerDto.setUsername(customer.getUsername());
 		customerDto.setActive(customer.getActive());
-		customerDto.setAddress(customer.getAddress());
+//		customerDto.setAddress(customer.getAddress());
 		return customerDto;
 	}
 

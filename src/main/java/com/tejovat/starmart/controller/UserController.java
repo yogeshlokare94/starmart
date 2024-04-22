@@ -11,7 +11,7 @@ import com.tejovat.starmart.service.UserService;
 
 import java.util.List;
 
-@RequestMapping("/users")
+@RequestMapping("/auth/users")
 @RestController
 public class UserController {
 	
@@ -30,7 +30,7 @@ public class UserController {
         return ResponseEntity.ok(currentUser);
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     public ResponseEntity<List<User>> allUsers() {
         List <User> users = userService.allUsers();
 

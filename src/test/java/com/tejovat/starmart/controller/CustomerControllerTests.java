@@ -53,7 +53,7 @@ public class CustomerControllerTests {
 		customer.setContactNo("9874563215");
 		customer.setLastName("Garu");
 		customer.setEmail("yogeshlokre7@gmail.com");
-		customer.setAddress(new Address(1l, 1, "Hello", null, null, null));
+		//customer.setAddress(new Address(1l, 1, "Hello", null, null, null));
 		when(customerService.createCustomer(any())).thenReturn(customer);
 		ResponseEntity<Customer> response = customerController.createCustomer(customer);
 		assertNotNull(response);

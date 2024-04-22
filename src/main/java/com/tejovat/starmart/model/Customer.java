@@ -54,8 +54,7 @@ public class Customer extends AuditorEntity implements Serializable{
 	@Size(min=10, max= 12, message = "Please enter contact no. more than 10 digit & less than 12 digit")
 	@Column(name="contactno")
 	private String contactNo;
-	
-	@AssertTrue
+
 	private Boolean active;
 	
 	private String username;
@@ -63,7 +62,7 @@ public class Customer extends AuditorEntity implements Serializable{
 	@JsonIgnore
 	private String password;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="address_id", referencedColumnName = "id")
-	private Address address;
+//	@OneToOne(cascade = CascadeType.ALL)
+//	@JoinColumn(name="address_id", referencedColumnName = "id")
+//	private Address address;
 }
